@@ -15,7 +15,7 @@ Feature: Authentication
 	@vcr
 	Scenario: Fresh user enters incorrect pin to oauth challenge
 		Given I am an unauthenticated user
-		When I attemt to authenticate
+		When I attempt to authenticate
 		Then I should see the twitter oauth authentication url
 		And I should be asked to enter the oauth code
 		When I provide an incorrect pin to the challenge

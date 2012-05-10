@@ -41,3 +41,11 @@ Then /^a twitter oauth token should be saved for the account$/ do
 	string[:secret].should_not be_nil
 end
 
+When /^I provide an incorrect pin to the challenge$/ do
+	@status = @auth.store_oauth_token('feiabeif38r3')
+end
+
+Then /^I should see an error message$/ do
+	@status.should be_a(Hash)
+	@status[:status].should be(false)
+end

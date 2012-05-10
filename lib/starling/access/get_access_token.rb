@@ -11,8 +11,13 @@ module Starling
 			end
 
 			def store_oauth_token(pin)
-				token = @consumer.get_access_token(pin)
+				begin
+					token = @consumer.get_access_token(pin)
+				rescue OAuth::Unauthorized => e
+					return {:status => false, :message => e.to_s}
+				end
 				@output.store_token(token)
+				{:status => true}
 			end
 
 			class ConsumerRole
