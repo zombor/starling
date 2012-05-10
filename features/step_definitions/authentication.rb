@@ -12,7 +12,7 @@ When /^I attempt to authenticate$/ do
 	@authorize_url = auth.get_access_token
 end
 
-Then /^I should should see the twitter oauth authentication url$/ do
+Then /^I should see the twitter oauth authentication url$/ do
 	@authorize_url.should be_a(String)
 end
 
@@ -25,11 +25,13 @@ Then /^I should be asked to enter the oauth code$/ do
 
 	@io = StringIO.new
 	@auth = Starling::Access::GetAccessToken.new(consumer, @io)
-	@auth.get_access_token
+	url = @auth.get_access_token
+	#puts url
 end
 
-When /^I provide an oauth code to the authenticator$/ do
-	pin = '0650515'
+When /^I provide the correct pin to the challenge$/ do
+	pin = '4126660'
+	#pin = STDIN.gets.strip
 	@status = @auth.store_oauth_token(pin)
 end
 
