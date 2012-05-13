@@ -1,9 +1,11 @@
+require 'starling/access/token'
+
 module Starling
 	module Access
 		class GetAccessToken
-			def initialize(consumer, output = STDOUT)
+			def initialize(consumer, store= Starling::Access::Token.new(StringIO.new))
 				@consumer = ConsumerRole.new(consumer)
-				@output = OutputRole.new(output)
+				@output = OutputRole.new(store)
 			end
 
 			def get_access_token
@@ -35,12 +37,12 @@ module Starling
 			end
 
 			class OutputRole
-				def initialize(output)
-					@output = output
+				def initialize(store)
+					@store = store
 				end
 
 				def store_token(token)
-					@output.puts({:token => token.token, :secret => token.secret})
+					@store.save_token({:token => token.token, :secret => token.secret})
 				end
 			end
 		end

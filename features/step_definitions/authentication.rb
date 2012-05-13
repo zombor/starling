@@ -23,8 +23,8 @@ Then /^I should be asked to enter the oauth code$/ do
 		:site => 'https://api.twitter.com'
 	)
 
-	@io = StringIO.new
-	@auth = Starling::Access::GetAccessToken.new(consumer, @io)
+	@store = Starling::Access::Token.new(StringIO.new)
+	@auth = Starling::Access::GetAccessToken.new(consumer, @store)
 	url = @auth.get_access_token
 	#puts url
 end
@@ -36,7 +36,7 @@ When /^I provide the correct pin to the challenge$/ do
 end
 
 Then /^a twitter oauth token should be saved for the account$/ do
-	string = eval(@io.string)
+	string = @store.get_token
 	string[:token].should_not be_nil
 	string[:secret].should_not be_nil
 end

@@ -15,7 +15,7 @@ describe Starling::Access::GetAccessToken do
 		consumer.should_receive(:get_request_token).and_return(RequestTokenMock.new)
 		pin = '12345'
 		datastore = double('datastore')
-		datastore.should_receive(:puts).with(kind_of(Hash))
+		datastore.should_receive(:save_token).with(kind_of(Hash))
 		auth = Starling::Access::GetAccessToken.new(consumer, datastore)
 		auth.get_access_token
 		response = auth.store_oauth_token(pin)
