@@ -1,0 +1,204 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.twitter.com/oauth/request_token
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - OAuth gem v0.4.5
+      content-length:
+      - '0'
+      authorization:
+      - OAuth oauth_body_hash="2jmj7l5rSw0yVb%2FvlWAYkK%2FYBwk%3D", oauth_callback="oob",
+        oauth_consumer_key="OqWJ77FNMTNOTjojT9gHMA", oauth_nonce="hRgzAZv5AIQDGFUzgHDggap3vNWji4u4lCPbccqjk",
+        oauth_signature="jNO7u%2FkxmOIoGlsokqwqtmITx70%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1336921566", oauth_version="1.0"
+      connection:
+      - close
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Sun, 13 May 2012 15:06:07 GMT
+      status:
+      - 200 OK
+      x-runtime:
+      - '0.03156'
+      content-length:
+      - '147'
+      x-frame-options:
+      - SAMEORIGIN
+      content-type:
+      - text/html; charset=utf-8
+      pragma:
+      - no-cache
+      x-transaction:
+      - 8e6bd1f05c0b1db2
+      etag:
+      - ! '"25c05257a1fce5a0871d1f4edffcd9e7"'
+      expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      x-mid:
+      - 2215836a59e28832059eab6f88a739533260f8b9
+      last-modified:
+      - Sun, 13 May 2012 15:06:07 GMT
+      cache-control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      set-cookie:
+      - k=10.34.122.121.1336921567657626; path=/; expires=Sun, 20-May-12 15:06:07
+        GMT; domain=.twitter.com
+      - guest_id=v1%3A133692156766464551; domain=.twitter.com; path=/; expires=Wed,
+        14-May-2014 03:06:07 GMT
+      - _twitter_sess=BAh7CDoPY3JlYXRlZF9hdGwrCLExvEY3ASIKZmxhc2hJQzonQWN0aW9uQ29u%250AdHJvbGxlcjo6Rmxhc2g6OkZsYXNoSGFzaHsABjoKQHVzZWR7ADoHaWQiJTBl%250ANTVlMmE2OTI1MmZkZDU1YTRkNDVhMTc3NjU5MGE5--c422d2bc6b65b72b0e99ebbfbef54faab55958e8;
+        domain=.twitter.com; path=/; HttpOnly
+      vary:
+      - Accept-Encoding
+      server:
+      - tfe
+    body:
+      encoding: US-ASCII
+      string: oauth_token=c9uSujyDVPNfRCCulfqA3vnB4LmJG3qhazFScuUWHM&oauth_token_secret=LkXdZ5CqHYb9ZEVGquUOASWGcW3357yclkCZSqJNm1k&oauth_callback_confirmed=true
+    http_version: '1.1'
+  recorded_at: Sun, 13 May 2012 15:06:06 GMT
+- request:
+    method: post
+    uri: https://api.twitter.com/oauth/request_token
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - OAuth gem v0.4.5
+      content-length:
+      - '0'
+      authorization:
+      - OAuth oauth_body_hash="2jmj7l5rSw0yVb%2FvlWAYkK%2FYBwk%3D", oauth_callback="oob",
+        oauth_consumer_key="OqWJ77FNMTNOTjojT9gHMA", oauth_nonce="hlwyxwTVKVt2wJeVhUmKBEgCz1p1PWrEyEM2F6Lv0",
+        oauth_signature="TVdTMM%2Bp%2FKOxnV2pfzi0vhUOgxg%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1336921566", oauth_version="1.0"
+      connection:
+      - close
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Sun, 13 May 2012 15:06:08 GMT
+      status:
+      - 200 OK
+      etag:
+      - ! '"d4fb9a0715a0f36b96c0a0a01048261d"'
+      expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      x-mid:
+      - 89f2a1181714cebc3079b28b861719cb39a3492a
+      x-transaction:
+      - 4a40ae69430fa284
+      pragma:
+      - no-cache
+      x-frame-options:
+      - SAMEORIGIN
+      x-runtime:
+      - '0.02261'
+      last-modified:
+      - Sun, 13 May 2012 15:06:08 GMT
+      cache-control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      content-length:
+      - '146'
+      content-type:
+      - text/html; charset=utf-8
+      set-cookie:
+      - k=10.34.124.118.1336921568444491; path=/; expires=Sun, 20-May-12 15:06:08
+        GMT; domain=.twitter.com
+      - guest_id=v1%3A133692156845262595; domain=.twitter.com; path=/; expires=Wed,
+        14-May-2014 03:06:08 GMT
+      - _twitter_sess=BAh7CDoPY3JlYXRlZF9hdGwrCMY0vEY3ASIKZmxhc2hJQzonQWN0aW9uQ29u%250AdHJvbGxlcjo6Rmxhc2g6OkZsYXNoSGFzaHsABjoKQHVzZWR7ADoHaWQiJTA1%250AY2FkM2ZlYmNiYmE4YTdmYTUwMWY4NGJmOGI0ZjM3--cee24567de52ee4a847b858e903c91ee2773e105;
+        domain=.twitter.com; path=/; HttpOnly
+      vary:
+      - Accept-Encoding
+      server:
+      - tfe
+    body:
+      encoding: US-ASCII
+      string: oauth_token=mZAQ71tVLvl1PnFULJJBo8SxazbCSjrdVLuqf34OE&oauth_token_secret=qIRQONEypw44aeWHP4EKsMrmu4e3IYvDPa5Lre60wNw&oauth_callback_confirmed=true
+    http_version: '1.1'
+  recorded_at: Sun, 13 May 2012 15:06:07 GMT
+- request:
+    method: post
+    uri: https://api.twitter.com/oauth/access_token
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - OAuth gem v0.4.5
+      content-length:
+      - '0'
+      authorization:
+      - OAuth oauth_body_hash="2jmj7l5rSw0yVb%2FvlWAYkK%2FYBwk%3D", oauth_consumer_key="OqWJ77FNMTNOTjojT9gHMA",
+        oauth_nonce="xF6JJy6oactUz3zmDZNe3aaxcLnnE4hZbzrqbOyDw", oauth_signature="RSfLXNgJ9ZLzrMJjrV2sYBt%2BAik%3D",
+        oauth_signature_method="HMAC-SHA1", oauth_timestamp="1336921579", oauth_token="mZAQ71tVLvl1PnFULJJBo8SxazbCSjrdVLuqf34OE",
+        oauth_verifier="2388007", oauth_version="1.0"
+      connection:
+      - close
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Sun, 13 May 2012 15:06:20 GMT
+      status:
+      - 200 OK
+      content-type:
+      - text/html; charset=utf-8
+      x-runtime:
+      - '0.03982'
+      content-length:
+      - '163'
+      x-transaction:
+      - b02ba4dd41e2f089
+      pragma:
+      - no-cache
+      expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      etag:
+      - ! '"049522e0591e7eaba95a76a1f0f14c6b"'
+      x-mid:
+      - 67b87be0c425a98f3946def5fa44faded9eb8311
+      x-frame-options:
+      - SAMEORIGIN
+      last-modified:
+      - Sun, 13 May 2012 15:06:20 GMT
+      cache-control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      set-cookie:
+      - k=10.34.122.121.1336921580916908; path=/; expires=Sun, 20-May-12 15:06:20
+        GMT; domain=.twitter.com
+      - guest_id=v1%3A133692158092484614; domain=.twitter.com; path=/; expires=Wed,
+        14-May-2014 03:06:20 GMT
+      - _twitter_sess=BAh7CDoPY3JlYXRlZF9hdGwrCH1lvEY3ASIKZmxhc2hJQzonQWN0aW9uQ29u%250AdHJvbGxlcjo6Rmxhc2g6OkZsYXNoSGFzaHsABjoKQHVzZWR7ADoHaWQiJTBk%250ANGVkZjZhZjFhNzk2MzExNmQwZWJjMDEzMjNlNmEw--86a9918ffe23290f65a23fa27b998a945005d968;
+        domain=.twitter.com; path=/; HttpOnly
+      vary:
+      - Accept-Encoding
+      server:
+      - tfe
+    body:
+      encoding: US-ASCII
+      string: oauth_token=16917949-4BJLawNiviFDA2MKVIbkDiPNJiZivlcQLqKKKQs&oauth_token_secret=JVbWhGOyv61n6ahn8AjvPX19VUGP7BJiHef95XuU6iE&user_id=16917949&screen_name=jeremybush
+    http_version: '1.1'
+  recorded_at: Sun, 13 May 2012 15:06:20 GMT
+recorded_with: VCR 2.1.1

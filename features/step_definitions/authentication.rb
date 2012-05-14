@@ -30,12 +30,19 @@ Then /^I should be asked to enter the oauth code$/ do
 end
 
 When /^I provide the correct pin to the challenge$/ do
-	pin = '4126660'
+	# This pin doesn't matter. When we are in vcr mode, uncomment the STDIN line
+	pin = '12345'
 	#pin = STDIN.gets.strip
 	@status = @auth.store_oauth_token(pin)
+
+	if @status[:status] == false
+		raise @status[:message]
+	end
 end
 
 Then /^a twitter oauth token should be saved for the account$/ do
+	raise "No token!" unless @store.has_token?
+
 	string = @store.get_token
 	string[:token].should_not be_nil
 	string[:secret].should_not be_nil

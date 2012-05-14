@@ -4,6 +4,7 @@ $:.unshift lib unless $:.include?(lib)
 require 'oauth'
 require 'vcr'
 require 'starling/access/get_access_token'
+require 'starling/timeline/mine'
 
 VCR.configure do |c|
 	c.hook_into :fakeweb
