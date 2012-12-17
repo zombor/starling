@@ -4,4 +4,4 @@ gemspec
 
 gem 'vcr'
 gem 'fakeweb'
-gem 'twitter-stream'
+gem 'tweetstream'
