@@ -3,6 +3,8 @@ require 'readline'
 module Starling
   module Timeline
     class Mine
+      attr_reader :output
+
       def initialize(client, output)
         @client = client
         @output = output
@@ -10,7 +12,7 @@ module Starling
 
       def latest(&block)
         @client.userstream do |status|
-          @output.write status.inspect
+          @output << status
 
           if block
             block.call

@@ -35,7 +35,7 @@ TweetStream.configure do |config|
 end
 
 EM.run do
-  timeline = Starling::Timeline::Mine.new(TweetStream::Client.new, $stdout)
+  timeline = Starling::Timeline::Mine.new(TweetStream::Client.new, [])
   require "readline"
   Thread.start do
     while buf = Readline.readline("> ", true)
@@ -47,9 +47,16 @@ EM.run do
     end
   end
 
-  timeline.latest do
+  EM.add_periodic_timer(1) do
+    timeline.output.each do |line|
+      puts "\e[0G\e[K#{line.from_user}: #{line.text}\n"
+    end
+
+    timeline.output.clear
     Readline.refresh_line
   end
+
+  timeline.latest
 end
 
 # vim:filetype=ruby
