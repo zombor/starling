@@ -6,6 +6,7 @@ $LOAD_PATH.unshift lib_path unless $LOAD_PATH.include?(lib_path)
 require 'starling/timeline/mine'
 require 'starling/access/get_access_token'
 require 'oauth'
+require 'tweetstream'
 
 
 consumer = OAuth::Consumer.new(
@@ -19,17 +20,32 @@ token_url = access_token.get_access_token
 puts "Please visit #{token_url} to obtain a PIN"
 puts "Please enter the PIN:"
 pin = gets.chomp
-token = access_token.store_oauth_token(pin)
+token = access_token.store_oauth_token(pin).get_token
+
+TweetStream.configure do |config|
+  config.consumer_key = 'OqWJ77FNMTNOTjojT9gHMA'
+  config.consumer_secret = 'vd7OcWDBUeDvXCEpL3O6zkGkyZV8x4E9e0mXIufDwk'
+  config.oauth_token = token[:token]
+  config.oauth_token_secret = token[:secret]
+  config.auth_method = :oauth
+end
 
 EM.run do
+  timeline = Starling::Timeline::Mine.new(TweetStream::Client.new, $stdout)
   require "readline"
   Thread.start do
     while buf = Readline.readline("> ", true)
-      p buf
+      if buf == 'stop'
+        timeline.stop
+      else
+        p buf
+      end
     end
   end
 
-  Starling::Timeline::Mine.new(token).latest
+  timeline.latest do
+    Readline.refresh_line
+  end
 end
 
 # vim:filetype=ruby
