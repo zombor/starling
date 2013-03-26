@@ -7,7 +7,7 @@ describe Starling::Access::GetAccessToken do
     consumer = double('consumer')
     consumer.should_receive(:get_request_token).and_return(RequestTokenMock.new)
     auth = Starling::Access::GetAccessToken.new(consumer)
-    auth.get_access_token.should be_a(String)
+    auth.get_access_token_url.should be_a(String)
   end
 
   it 'should store the oauth token in a data store' do
@@ -17,7 +17,7 @@ describe Starling::Access::GetAccessToken do
     datastore = double('datastore')
     datastore.should_receive(:save_token).with(kind_of(Hash))
     auth = Starling::Access::GetAccessToken.new(consumer, datastore)
-    auth.get_access_token
+    auth.get_access_token_url
     response = auth.store_oauth_token(pin)
 
     response.should == datastore
@@ -30,7 +30,7 @@ describe Starling::Access::GetAccessToken do
     datastore = double('datastore')
     datastore.should_not_receive(:puts).with(kind_of(Hash))
     auth = Starling::Access::GetAccessToken.new(consumer, datastore)
-    auth.get_access_token
+    auth.get_access_token_url
 
     lambda { response = auth.store_oauth_token(pin) }.should raise_error(OAuth::Unauthorized)
   end

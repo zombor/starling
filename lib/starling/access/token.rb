@@ -14,13 +14,16 @@ module Starling
       end
 
       def has_token?
-        parse_stored_token.is_a?(Hash) && parse_stored_token.has_key?(:token) && parse_stored_token.has_key?(:secret)
+        token = parse_stored_token
+        token.is_a?(Hash) && token.has_key?(:token) && token.has_key?(:secret)
       end
 
       private
 
       def parse_stored_token
-        eval @store.string
+        @store.rewind
+        val = @store.read
+        eval val
       end
     end
   end

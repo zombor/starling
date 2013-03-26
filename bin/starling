@@ -15,12 +15,16 @@ consumer = OAuth::Consumer.new(
   :site => 'https://api.twitter.com',
   :scheme => :header
 )
-access_token = Starling::Access::GetAccessToken.new(consumer)
-token_url = access_token.get_access_token
-puts "Please visit #{token_url} to obtain a PIN"
-puts "Please enter the PIN:"
-pin = gets.chomp
-token = access_token.store_oauth_token(pin).get_token
+access_token = Starling::Access::GetAccessToken.new(consumer, Starling::Access::Token.new(File.open('.access_token', 'r+')))
+
+token = access_token.get_token
+if token.nil?
+  token_url = access_token.get_access_token_url
+  puts "Please visit #{token_url} to obtain a PIN"
+  puts "Please enter the PIN:"
+  pin = gets.chomp
+  token = access_token.store_oauth_token(pin).get_token
+end
 
 TweetStream.configure do |config|
   config.consumer_key = 'OqWJ77FNMTNOTjojT9gHMA'

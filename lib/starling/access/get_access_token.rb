@@ -3,13 +3,19 @@ require 'starling/access/token'
 module Starling
   module Access
     class GetAccessToken
+      attr_reader :store
+
       def initialize(consumer, store = Starling::Access::Token.new(StringIO.new))
         @consumer = ConsumerRole.new(consumer)
         @output = OutputRole.new(store)
       end
 
-      def get_access_token
+      def get_access_token_url
         @consumer.get_request_token.authorize_url
+      end
+
+      def get_token
+        @output.store.get_token
       end
 
       def store_oauth_token(pin)
