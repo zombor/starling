@@ -64,4 +64,5 @@ DEPENDENCIES
   rspec
   starling.gem!
   tweetstream
+  twitter
   vcr

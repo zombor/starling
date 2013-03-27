@@ -5,6 +5,7 @@ gemspec
 gem 'vcr'
 gem 'fakeweb'
 gem 'tweetstream'
+gem 'twitter'
 gem 'oauth'
 gem 'oj'
 gem 'colorize'
