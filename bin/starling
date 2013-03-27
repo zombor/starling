@@ -8,6 +8,7 @@ require 'starling/access/get_access_token'
 require 'starling/output/cli'
 require 'oauth'
 require 'tweetstream'
+require 'readline'
 
 
 consumer = OAuth::Consumer.new(
@@ -28,28 +29,36 @@ if token.nil?
 end
 
 TweetStream.configure do |config|
-  config.consumer_key = 'OqWJ77FNMTNOTjojT9gHMA'
-  config.consumer_secret = 'vd7OcWDBUeDvXCEpL3O6zkGkyZV8x4E9e0mXIufDwk'
+  config.consumer_key = Starling.config[:oauth][:consumer_key]
+  config.consumer_secret = Starling.config[:oauth][:consumer_secret]
   config.oauth_token = token[:token]
   config.oauth_token_secret = token[:secret]
   config.auth_method = :oauth
 end
 
+twitter = Twitter::Client.new(
+  :consumer_key => Starling.config[:oauth][:consumer_key]
+  :consumer_secret => Starling.config[:oauth][:consumer_secret]
+  :oauth_token => token[:token]
+  :oauth_token_secret => token[:secret]
+end
+
 EM.run do
   timeline = Starling::Timeline::Mine.new(TweetStream::Client.new, [])
-  require "readline"
+  starling_twitter = Starling::Twitter::Twitter.new(twitter)
+  command = Starling::Command.new(starling_twitter, timeline Starling::Output::CLI.new)
   Thread.start do
     while buf = Readline.readline("> ", true)
       if buf == 'stop'
         timeline.stop
       else
-        p buf
+        command.process(buf.chomp)
       end
     end
   end
 
   EM.add_periodic_timer(1) do
-    Starling::Output::CLI.new(timeline.output).output
+    Starling::Output::CLI.new.output(timeline.output)
 
     timeline.output.clear
     Readline.refresh_line

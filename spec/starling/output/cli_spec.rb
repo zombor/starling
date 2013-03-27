@@ -9,13 +9,11 @@ describe Starling::Output::CLI do
     ]
   }
 
-  subject { described_class.new(data) }
-
   it 'puts the array to $stdout' do
     begin
       $stdout = StringIO.new
 
-      subject.output
+      subject.output(data)
       $stdout.string.split("\n").size.should == 2
     ensure
       $stdout = STDOUT

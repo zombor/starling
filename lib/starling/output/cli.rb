@@ -3,8 +3,7 @@ require 'colorize'
 module Starling
   module Output
     class CLI
-      def initialize(data)
-        @data = data
+      def initialize
         @color_codes = (31..36).to_a + (91..96).to_a
         @colors = {
           31 => :blue,
@@ -22,8 +21,8 @@ module Starling
         }
       end
 
-      def output
-        @data.each do |line|
+      def output(data)
+        data.each do |line|
           $stdout.print "\e[0G\e[K#{line.from_user.colorize(color_of(line.from_user))}: #{line.text}\n"
         end
       end
