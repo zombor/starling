@@ -7,6 +7,7 @@ gem 'fakeweb'
 gem 'tweetstream'
 gem 'oauth'
 gem 'oj'
+gem 'colorize'
 
 group :test do
   gem 'rspec'

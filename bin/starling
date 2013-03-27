@@ -5,6 +5,7 @@ $LOAD_PATH.unshift lib_path unless $LOAD_PATH.include?(lib_path)
 
 require 'starling/timeline/mine'
 require 'starling/access/get_access_token'
+require 'starling/output/cli'
 require 'oauth'
 require 'tweetstream'
 
@@ -15,15 +16,15 @@ consumer = OAuth::Consumer.new(
   :site => 'https://api.twitter.com',
   :scheme => :header
 )
-access_token = Starling::Access::GetAccessToken.new(consumer, Starling::Access::Token.new(File.open('.access_token', 'r+')))
+token_grabber = Starling::Access::GetAccessToken.new(consumer, Starling::Access::Token.new(File.open('.access_token', 'r+')))
 
-token = access_token.get_token
+token = token_grabber.get_token
 if token.nil?
-  token_url = access_token.get_access_token_url
+  token_url = token_grabber.get_access_token_url
   puts "Please visit #{token_url} to obtain a PIN"
   puts "Please enter the PIN:"
   pin = gets.chomp
-  token = access_token.store_oauth_token(pin).get_token
+  token = token_grabber.store_oauth_token(pin).get_token
 end
 
 TweetStream.configure do |config|
@@ -48,9 +49,7 @@ EM.run do
   end
 
   EM.add_periodic_timer(1) do
-    timeline.output.each do |line|
-      puts "\e[0G\e[K#{line.from_user}: #{line.text}\n"
-    end
+    Starling::Output::CLI.new(timeline.output).output
 
     timeline.output.clear
     Readline.refresh_line
