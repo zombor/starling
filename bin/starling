@@ -59,6 +59,6 @@ starling_twitter = Starling::TwitterClient::Twitter.new(twitter)
 command = Starling::Command.new(starling_twitter, timeline, Starling::Output::CLI.new)
 output = Starling::Output::CLI.new
 
-Starling::Delivery::CLI.new(Starling.config).execute(timeline, starling_twitter, command, output)
+Starling::Delivery::CLI.new(Starling.config, timeline, starling_twitter, command, output).execute
 
 # vim:filetype=ruby
