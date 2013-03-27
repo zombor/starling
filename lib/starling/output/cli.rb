@@ -23,7 +23,8 @@ module Starling
 
       def output(data)
         data.each do |line|
-          $stdout.print "\e[0G\e[K#{line.from_user.colorize(color_of(line.from_user))}: #{line.text}\n"
+          text = colorize_handle(line.full_text)
+          $stdout.print "\e[0G\e[K#{line.from_user.colorize(color_of(line.from_user))}: #{text}\n"
         end
       end
 
@@ -32,6 +33,12 @@ module Starling
       def color_of(string)
         num = string.delete("^0-9A-Za-z_").to_i(36) % @colors.size
         @colors[@color_codes[num]]
+      end
+
+      def colorize_handle(text)
+        text.gsub(/@([A-Za-z0-9_]{1,15})/) do |username|
+          username.colorize(color_of(username))
+        end
       end
     end
   end
