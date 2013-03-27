@@ -19,4 +19,15 @@ describe Starling::Output::CLI do
       $stdout = STDOUT
     end
   end
+
+  it 'handles plain string outputs' do
+    begin
+      $stdout = StringIO.new
+
+      subject.output(['test'])
+      $stdout.string.should == "\e[0G\e[Ktest\n"
+    ensure
+      $stdout = STDOUT
+    end
+  end
 end

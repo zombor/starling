@@ -23,8 +23,12 @@ module Starling
 
       def output(data)
         data.each do |line|
-          text = colorize_handle(line.full_text)
-          $stdout.print "\e[0G\e[K#{line.from_user.colorize(color_of(line.from_user))}: #{text}\n"
+          if line.respond_to? :full_text
+            text = colorize_handle(line.full_text)
+            $stdout.print "\e[0G\e[K#{line.from_user.colorize(color_of(line.from_user))}: #{text}\n"
+          else
+            $stdout.print "\e[0G\e[K#{line}\n"
+          end
         end
       end
 
