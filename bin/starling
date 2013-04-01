@@ -10,6 +10,7 @@ require 'starling/output/cli'
 require 'starling/twitter_client/twitter'
 require 'starling/command'
 require 'starling/delivery/cli'
+require 'starling/id_generate'
 require 'oauth'
 require 'tweetstream'
 require 'twitter'
@@ -54,7 +55,7 @@ twitter = Twitter::Client.new(
   :oauth_token_secret => token[:secret]
 )
 
-timeline = Starling::Timeline::Mine.new(TweetStream::Client.new, [])
+timeline = Starling::Timeline::Mine.new(TweetStream::Client.new, [], Starling::IdGenerate.new({}))
 starling_twitter = Starling::TwitterClient::Twitter.new(twitter)
 command = Starling::Command.new(starling_twitter, timeline, Starling::Output::CLI.new)
 output = Starling::Output::CLI.new

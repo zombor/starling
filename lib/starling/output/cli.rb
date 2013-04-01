@@ -25,7 +25,8 @@ module Starling
         data.each do |line|
           if line.respond_to? :full_text
             text = colorize_handle(line.full_text)
-            $stdout.print "\e[0G\e[K#{line.from_user.colorize(color_of(line.from_user))}: #{text}\n"
+            token = "\[\$#{line.token}\]".colorize(:light_black)
+            $stdout.print "\e[0G\e[K\[\$#{line.token}\] #{line.from_user.colorize(color_of(line.from_user))}: #{text}\n"
           else
             $stdout.print "\e[0G\e[K#{line}\n"
           end

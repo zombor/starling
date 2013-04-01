@@ -1,18 +1,21 @@
 require 'readline'
+require 'starling/tweet'
 
 module Starling
   module Timeline
     class Mine
       attr_reader :output
 
-      def initialize(client, output)
+      def initialize(client, output, id_generator)
         @client = client
         @output = output
+        @id_generator = id_generator
       end
 
       def latest(&block)
         @client.userstream do |status|
-          @output << status
+          token = @id_generator.store(status.id)
+          @output << Tweet.new(token, status)
 
           if block
             block.call
