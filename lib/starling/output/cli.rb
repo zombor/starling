@@ -24,7 +24,7 @@ module Starling
       def output(data)
         data.each do |line|
           if line.respond_to? :full_text
-            text = colorize_handle(line.full_text)
+            text = colorize_handles(line.full_text)
             token = "\[\$#{line.token}\]".colorize(:light_black)
             $stdout.print "\e[0G\e[K\[\$#{line.token}\] #{line.from_user.colorize(color_of(line.from_user))}: #{text}\n"
           else
@@ -40,7 +40,7 @@ module Starling
         @colors[@color_codes[num]]
       end
 
-      def colorize_handle(text)
+      def colorize_handles(text)
         text.gsub(/@([A-Za-z0-9_]{1,15})/) do |username|
           username.colorize(color_of(username))
         end
