@@ -1,7 +1,7 @@
 require 'starling/timeline/mine'
 
 describe Starling::Timeline::Mine do
-  let(:client) { double(:client) }
+  let(:client) { double(:client, :on_error => nil, :on_reconnect => nil, :on_max_reconnects => nil) }
   let(:output) { double(:output, :<< => nil) }
   let(:tweet) { double(:tweet, :id => 1234567890, :from_user => 'test', :text => 'text') }
   let(:starling_tweet) { double(:starling_tweet, :id => 1234567890) }
@@ -37,5 +37,10 @@ describe Starling::Timeline::Mine do
     client.should_receive(:stop)
 
     subject.stop
+  end
+
+  context :callbacks do
+    it 'handles errors'
+    it 'handles reconnects'
   end
 end

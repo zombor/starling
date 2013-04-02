@@ -10,6 +10,14 @@ module Starling
         @client = client
         @output = output
         @id_generator = id_generator
+
+        @client.on_error do |message|
+          @output << "error: #{message}"
+        end
+
+        @client.on_reconnect do |timeout, retries|
+          @output << "reconnecting in #{timeout} seconds..."
+        end
       end
 
       def latest(&block)
