@@ -8,6 +8,10 @@ module Starling
       def send_tweet(text)
         @client.update(text)
       end
+
+      def reply(id, text)
+        @client.update(text, {:in_reply_to_status_id => id})
+      end
     end
   end
 end
