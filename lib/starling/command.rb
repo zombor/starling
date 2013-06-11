@@ -42,5 +42,11 @@ module Starling
 
       @client.reply(id, status)
     end
+
+    def again(count = nil)
+      tweets = @client.home_timeline(count.to_i).reverse
+      tweets.map! {|t| Starling::Tweet.new(@storage.store(t.id), t) }
+      @output.output tweets
+    end
   end
 end
