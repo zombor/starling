@@ -13,6 +13,10 @@ module Starling
         @client.update(text, {:in_reply_to_status_id => id})
       end
 
+      def find_by_id(id)
+        @client.status(id)
+      end
+
       def home_timeline(count = nil)
         @client.home_timeline(:count => count)
       end

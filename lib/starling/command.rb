@@ -40,6 +40,8 @@ module Starling
 
       id = @storage.fetch(token)
 
+      status = "@#{Starling::Tweet.new(nil, @client.find_by_id(id)).from_user} #{status}"
+
       @client.reply(id, status)
     end
 

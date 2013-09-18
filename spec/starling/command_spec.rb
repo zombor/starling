@@ -37,7 +37,8 @@ describe Starling::Command do
     token = 'aa'
 
     storage.should_receive(:fetch).with('aa').and_return(id)
-    client.should_receive(:reply).with(id, 'test')
+    client.should_receive(:reply).with(id, '@rspec test')
+    client.should_receive(:find_by_id).with(id).and_return(double(:tweet, :from_user => 'rspec'))
 
     subject.process("/reply $#{token} test")
   end
