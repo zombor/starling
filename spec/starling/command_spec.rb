@@ -69,4 +69,14 @@ describe Starling::Command do
       subject.process '/again 5'
     end
   end
+
+  it 'retweets' do
+    id = 12345
+    token = 'aa'
+
+    storage.should_receive(:fetch).with('aa').and_return(id)
+    client.should_receive(:retweet).with(id)
+
+    subject.process("/retweet $#{token}")
+  end
 end

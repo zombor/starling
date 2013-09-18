@@ -36,9 +36,8 @@ module Starling
 
     def reply(text)
       token, status = text.split(' ', 2)
-      token[0] = ''
 
-      id = @storage.fetch(token)
+      id = @storage.fetch(strip_token(token))
 
       status = "@#{Starling::Tweet.new(nil, @client.find_by_id(id)).from_user} #{status}"
 
@@ -49,6 +48,16 @@ module Starling
       tweets = @client.home_timeline(count.to_i).reverse
       tweets.map! {|t| Starling::Tweet.new(@storage.store(t.id), t) }
       @output.output tweets
+    end
+
+    def retweet(token)
+      id = @storage.fetch(strip_token(token))
+      @client.retweet(id)
+    end
+
+    def strip_token(token)
+      token[0] = ''
+      token
     end
   end
 end

@@ -17,6 +17,10 @@ module Starling
         @client.status(id)
       end
 
+      def retweet(id)
+        @client.retweet([id])
+      end
+
       def home_timeline(count = nil)
         @client.home_timeline(:count => count)
       end
